@@ -24,9 +24,13 @@ class AdminController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
 
+        if (empty($username) || empty($password)) {
+            return response()->json(['error' => 'Username and password required', 'debug_username' => $username, 'debug_has_password' => !empty($password), 'content_type' => $request->header('Content-Type'), 'all_input' => $request->all()], 400);
+        }
+
         $user = AdminUser::where('username', $username)->first();
         if (!$user) {
-            return response()->json(['error' => 'Invalid credentials'], 401);
+            return response()->json(['error' => 'Invalid credentials', 'debug' => 'user_not_found', 'tried' => $username], 401);
         }
 
         // Handle bcryptjs ($2a$) and PHP bcrypt ($2y$) compatibility
@@ -34,7 +38,7 @@ class AdminController extends Controller
         $compatHash = preg_replace('/^\$2a\$/', '$2y$', $storedHash);
 
         if (!password_verify($password, $compatHash)) {
-            return response()->json(['error' => 'Invalid credentials'], 401);
+            return response()->json(['error' => 'Invalid credentials', 'debug' => 'password_mismatch'], 401);
         }
 
         session(['admin_logged_in' => true, 'admin_user' => $username]);
