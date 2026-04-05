@@ -1,0 +1,321 @@
+/* ===== SHARED STYLES — Chittara Star Awards ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --gold-dark: #a17d1a;
+  --maroon: #8b1a1a;
+  --maroon-dark: #5c0e0e;
+  --cream: #faf6ee;
+  --white: #ffffff;
+  --dark: #1a1a1a;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ===== TOP HEADER BAR ===== */
+.top-header {
+  background: linear-gradient(180deg, #f7f2e8 0%, #ede5d5 40%, #e8dcc8 100%);
+  padding: 25px 0 20px;
+  position: relative;
+}
+.top-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(210,190,150,0.3) 0%, transparent 70%),
+              radial-gradient(ellipse at 70% 30%, rgba(220,200,160,0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+.top-header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+.logo-left {
+  flex: 0 0 auto;
+  min-width: 100px;
+}
+.logo-left img {
+  height: 90px;
+  object-fit: contain;
+}
+.header-center {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 0 30px;
+}
+.header-center img {
+  max-height: 130px;
+  max-width: 100%;
+  object-fit: contain;
+}
+.logos-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 0 0 auto;
+}
+.logos-right img {
+  height: 90px;
+  object-fit: contain;
+}
+
+/* ===== SOCIAL MEDIA ROW ===== */
+.social-row {
+  background: var(--cream);
+  padding: 14px 0;
+  border-bottom: 3px solid var(--maroon);
+}
+.social-row-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 0 30px;
+}
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.social-icon:hover {
+  transform: scale(1.15);
+}
+.social-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  background: var(--white);
+  border-top: 2px solid var(--maroon);
+  border-bottom: 2px solid var(--maroon);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.navbar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 0 15px;
+}
+.navbar a {
+  color: var(--maroon-dark);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 15px 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  white-space: nowrap;
+  position: relative;
+}
+.navbar a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.navbar a:hover {
+  color: var(--gold-dark);
+}
+.navbar a:hover::after {
+  width: 80%;
+}
+.navbar a.active {
+  color: var(--gold-dark);
+}
+.navbar a.active::after {
+  width: 80%;
+}
+.mobile-menu-btn {
+  display: none;
+  background: var(--maroon);
+  color: var(--white);
+  border: none;
+  padding: 8px 15px;
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* ===== VOTE CTA BAR ===== */
+.vote-cta-bar {
+  background: var(--cream);
+  text-align: center;
+  padding: 15px;
+}
+.vote-cta-bar a {
+  background: var(--maroon);
+  color: var(--white);
+  padding: 13px 45px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-block;
+  transition: all 0.3s;
+  letter-spacing: 0.5px;
+}
+.vote-cta-bar a:hover {
+  background: var(--maroon-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(139,26,26,0.3);
+}
+
+/* ===== STICKY VOTE BUTTON ===== */
+.sticky-vote-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--maroon);
+  color: var(--white);
+  padding: 14px 28px;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(139,26,26,0.4);
+  z-index: 9999;
+  transition: all 0.3s;
+}
+.sticky-vote-btn:hover {
+  background: var(--maroon-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(139,26,26,0.5);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--maroon-dark);
+  color: var(--cream);
+  text-align: center;
+  padding: 25px 20px;
+  font-size: 13px;
+  border-top: 3px solid var(--maroon);
+}
+.footer a { color: var(--gold-light); }
+
+/* ===== SECTION SHARED ===== */
+.section-gold-bg {
+  position: relative;
+  background-color: var(--cream);
+  background-image: var(--section-bg-image, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border-top: 3px solid var(--maroon);
+}
+.section-gold-bg > * {
+  position: relative;
+  z-index: 1;
+}
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--maroon-dark);
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  text-align: center;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--gold);
+  margin: 10px auto 0;
+}
+
+/* ===== PARTNERS BAR (reused as section header bar) ===== */
+.partners-bar {
+  background: var(--maroon);
+  padding: 12px;
+  margin-bottom: 30px;
+}
+.partners-bar h2 {
+  font-family: 'Cinzel', serif;
+  color: var(--white);
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 5px;
+}
+
+/* Loading */
+.loading { text-align: center; padding: 60px; }
+.loading-logo {
+  width: 120px;
+  height: auto;
+  animation: logoPulse 1.5s ease-in-out infinite;
+  margin-bottom: 10px;
+}
+@keyframes logoPulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1); }
+}
+.empty-state { text-align: center; padding: 40px; color: #999; font-style: italic; }
+.section-hidden { display: none; }
+
+/* ===== RESPONSIVE (shared) ===== */
+@media (max-width: 1100px) {
+  .navbar a { padding: 14px 14px; font-size: 12px; }
+}
+@media (max-width: 900px) {
+  .logo-left img, .logos-right img { height: 60px; }
+  .header-center img { max-height: 90px; }
+  .navbar a { padding: 12px 10px; font-size: 11px; }
+}
+@media (max-width: 600px) {
+  .sticky-vote-btn {
+    bottom: 15px;
+    right: 15px;
+    padding: 10px 20px;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  .top-header-inner { flex-direction: column; gap: 12px; text-align: center; }
+  .logo-left img, .logos-right img { height: 45px; }
+  .header-center img { max-height: 70px; }
+  .top-header-inner { padding: 0 15px; }
+  .social-row-inner { flex-wrap: wrap; gap: 12px; }
+  .navbar-inner { display: none; flex-direction: column; }
+  .navbar-inner.open { display: flex; }
+  .mobile-menu-btn { display: block; margin: 8px auto; }
+}

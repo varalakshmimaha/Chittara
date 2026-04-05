@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote - Chittara Star Awards 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dark: #a17d1a;
+      --maroon: #8b1a1a;
+      --maroon-dark: #5c0e0e;
+      --cream: #faf6ee;
+      --white: #ffffff;
+      --dark: #1a1a1a;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    .vote-header {
+      background: linear-gradient(180deg, var(--maroon-dark) 0%, var(--maroon) 100%);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+      position: relative;
+    }
+    .vote-header h1 {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+    .vote-header p {
+      color: var(--gold-light);
+      font-size: 13px;
+      margin-top: 5px;
+      letter-spacing: 2px;
+    }
+    .vote-header-logo {
+      max-height: 60px;
+      margin-bottom: 10px;
+    }
+    .back-link {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .back-link:hover { color: var(--white); }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress-bar-container {
+      background: var(--white);
+      padding: 15px 20px 20px;
+      border-bottom: 2px solid var(--gold-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 800px;
+      margin: 0 auto 10px;
+      font-size: 13px;
+      color: var(--maroon);
+      font-weight: 600;
+    }
+    .progress-track {
+      max-width: 800px;
+      margin: 0 auto;
+      height: 8px;
+      background: #e0d5c1;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--maroon), var(--gold));
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .progress-dots {
+      max-width: 800px;
+      margin: 8px auto 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .progress-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e0d5c1;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .progress-dot.done { background: var(--gold); }
+    .progress-dot.active { background: var(--maroon); transform: scale(1.3); }
+
+    /* ===== VOTING SECTION ===== */
+    .voting-section {
+      padding: 30px 0 60px;
+      background: var(--cream);
+      background-size: cover;
+      background-position: center;
+      min-height: 70vh;
+    }
+    .voting-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== CATEGORY PAGE (one at a time) ===== */
+    .category-page {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+    .category-page.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .category-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--maroon);
+      text-align: center;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    .nominees-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      justify-items: center;
+    }
+    .nominee-card {
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 12px;
+      border-radius: 12px;
+      border: 3px solid transparent;
+      width: 100%;
+      max-width: 200px;
+    }
+    .nominee-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(201,168,76,0.2);
+    }
+    .nominee-card.selected {
+      border-color: var(--maroon);
+      background: rgba(139,26,26,0.03);
+      box-shadow: 0 5px 20px rgba(139,26,26,0.15);
+    }
+    .nominee-img-wrapper {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      overflow: hidden;
+      border: 4px solid var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-light), 0 5px 20px rgba(201,168,76,0.3);
+      position: relative;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+      padding: 3px;
+    }
+    .nominee-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .nominee-radio {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      transition: all 0.3s;
+      background: var(--white);
+    }
+    .nominee-card.selected .nominee-radio {
+      border-color: var(--maroon);
+      background: var(--maroon);
+      color: var(--white);
+    }
+    .nominee-radio input[type="radio"] {
+      accent-color: var(--maroon);
+      width: 16px;
+      height: 16px;
+    }
+    .nominee-name {
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nominee-subtitle {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+    }
+    .nominee-card.selected .nominee-subtitle {
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ===== NAVIGATION BUTTONS ===== */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 35px;
+      gap: 15px;
+    }
+    .nav-btn {
+      padding: 14px 35px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    .btn-prev {
+      background: var(--white);
+      color: var(--maroon);
+      border: 2px solid var(--maroon);
+    }
+    .btn-prev:hover:not(:disabled) {
+      background: var(--maroon);
+      color: var(--white);
+    }
+    .btn-next {
+      background: var(--maroon);
+      color: var(--white);
+    }
+    .btn-next:hover:not(:disabled) {
+      background: var(--maroon-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139,26,26,0.3);
+    }
+    .btn-skip {
+      background: transparent;
+      color: #999;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+      padding: 10px 20px;
+    }
+    .btn-skip:hover:not(:disabled) {
+      color: var(--maroon);
+    }
+    .selection-badge {
+      display: inline-block;
+      background: #d4edda;
+      color: #155724;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+
+    /* ===== VOTER FORM (final page) ===== */
+    .voter-form-section {
+      max-width: 650px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 15px;
+      padding: 40px 35px;
+      box-shadow: 0 5px 25px rgba(139,26,26,0.08);
+      border: 2px solid rgba(201,168,76,0.3);
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+    .voter-form-section.active { display: block; }
+    .voter-form-section h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: var(--maroon);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .selections-summary {
+      background: #faf6ee;
+      border: 1px solid var(--gold-light);
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 25px;
+    }
+    .selections-summary h4 {
+      font-size: 14px;
+      color: var(--maroon);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 13px;
+      border-bottom: 1px solid #e8e0d0;
+    }
+    .summary-item:last-child { border-bottom: none; }
+    .summary-cat { color: #888; font-weight: 500; }
+    .summary-nom { color: var(--maroon-dark); font-weight: 600; }
+    .summary-skipped { color: #ccc; font-style: italic; }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--maroon-dark);
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0d5c1;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s;
+      background: #fefcf7;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    }
+    .captcha-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .captcha-row .captcha-img {
+      border: 2px solid #e0d5c1;
+      border-radius: 8px;
+      background: #f5f5f5;
+      padding: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .captcha-row .captcha-img:hover {
+      border-color: var(--gold);
+    }
+    .captcha-row input { flex: 1; }
+    .captcha-refresh {
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    .captcha-refresh:hover {
+      background: var(--gold-dark);
+      color: var(--white);
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: var(--maroon);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    .submit-btn:hover {
+      background: var(--maroon-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139,26,26,0.3);
+    }
+    .submit-btn:disabled {
+      background: #999;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .back-to-voting {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .back-to-voting button {
+      background: none;
+      border: none;
+      color: var(--maroon);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    /* MESSAGE */
+    .message {
+      text-align: center;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      display: none;
+    }
+    .message.error { background: #fee; color: var(--maroon); border: 1px solid #fcc; display: block; }
+    .message.success { background: #efe; color: #2a7a2a; border: 1px solid #cfc; display: block; }
+
+    /* Loading */
+    .loading { text-align: center; padding: 60px; }
+    .loading-logo {
+      width: 120px;
+      height: auto;
+      animation: logoPulse 1.5s ease-in-out infinite;
+      margin-bottom: 10px;
+    }
+    @keyframes logoPulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.92); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    .empty-state { text-align: center; padding: 40px; color: #999; font-style: italic; }
+
+    /* ===== THANK YOU ===== */
+    .thank-you-section {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+      animation: fadeIn 0.5s ease;
+    }
+    .thank-you-section.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 200px);
+    }
+    .thank-you-section img {
+      width: 100%;
+      max-width: 550px;
+      max-height: 60vh;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+    .thank-you-back {
+      margin-top: 20px;
+      padding-bottom: 20px;
+    }
+    .thank-you-back a {
+      display: inline-block;
+      background: var(--maroon);
+      color: var(--white);
+      padding: 14px 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    .thank-you-back a:hover {
+      background: var(--maroon-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139,26,26,0.3);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--maroon-dark);
+      color: var(--cream);
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 13px;
+      border-top: 3px solid var(--maroon);
+    }
+    .footer a { color: var(--gold-light); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .category-title { font-size: 20px; }
+      .nominees-grid { grid-template-columns: repeat(4, 1fr); gap: 15px; }
+      .nominee-img-wrapper { width: 110px; height: 110px; }
+    }
+    @media (max-width: 600px) {
+      .vote-header h1 { font-size: 20px; letter-spacing: 2px; }
+      .vote-header { padding: 15px; }
+      .voting-section { padding: 20px 0 40px; }
+      .category-title { font-size: 18px; letter-spacing: 1px; }
+      .nominees-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .nominee-card { padding: 8px; }
+      .nominee-img-wrapper { width: 90px; height: 90px; }
+      .nominee-name { font-size: 11px; }
+      .nominee-subtitle { font-size: 10px; }
+      .voter-form-section { padding: 25px 20px; }
+      .captcha-row { flex-direction: column; }
+      .back-link { position: static; transform: none; margin-bottom: 10px; display: inline-flex; }
+      .nav-btn { padding: 12px 20px; font-size: 13px; letter-spacing: 1px; }
+      .progress-dots { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="vote-header">
+    <a href="/" class="back-link">&#8592; Back to Home</a>
+    <img src="" alt="" class="vote-header-logo" id="headerLogo" style="display:none;">
+    <h1 id="voteHeaderTitle">Chittara Star Awards 2026</h1>
+    <p>Select Your Favourite Nominees & Vote</p>
+  </header>
+
+  <!-- ===== PROGRESS BAR ===== -->
+  <div class="progress-bar-container" id="progressBar">
+    <div class="progress-info">
+      <span id="progressLabel">Category 1 of ...</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+  </div>
+
+  <!-- ===== VOTING SECTION ===== -->
+  <section class="voting-section" id="votingSection">
+    <div class="voting-container">
+      <!-- Category pages get rendered here -->
+      <div id="categoriesContainer">
+        <div class="loading"><img src="/uploads/logos/chittara-loader.png" alt="Loading" class="loading-logo"><p>Loading nominees...</p></div>
+      </div>
+
+      <!-- VOTER FORM (shown after all categories) -->
+      <div class="voter-form-section" id="voterForm">
+        <h3>Submit Your Vote</h3>
+        <div id="selectionsSummary" class="selections-summary"></div>
+        <div class="message" id="voteMessage"></div>
+        <form id="voteFormEl" onsubmit="submitVote(event)">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="voterName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label>Mobile Number (10 digits) *</label>
+            <input type="tel" id="voterMobile" placeholder="Enter 10-digit mobile number" maxlength="10" pattern="[0-9]{10}" required>
+          </div>
+          <div class="form-group">
+            <label>Location *</label>
+            <input type="text" id="voterLocation" placeholder="Enter your city/location" required>
+          </div>
+          <div class="form-group">
+            <label>Solve the Math *</label>
+            <div class="captcha-row">
+              <img class="captcha-img" id="captchaImg" src="/api/captcha" alt="captcha" title="Click to refresh" onclick="refreshCaptcha()">
+              <input type="text" id="voterCaptcha" placeholder="Enter captcha text" required>
+              <button type="button" class="captcha-refresh" onclick="refreshCaptcha()" title="Refresh captcha">&#8635;</button>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">Submit Vote</button>
+        </form>
+        <div class="back-to-voting">
+          <button onclick="goBack()">&#8592; Go back and change selections</button>
+        </div>
+      </div>
+
+      <!-- THANK YOU -->
+      <div class="thank-you-section" id="thankYou">
+        <img src="/uploads/Cinema/thanks-you-voting-card-PNG 1.png" alt="Thank You for Voting - Chittara Star Awards 2026">
+        <div class="thank-you-back">
+          <a href="/">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p id="footerText">Copyright &copy; 2026 Chittara Awards. All rights reserved.</p>
+    <p>Powered by Chittara Media Networks</p>
+  </footer>
+
+  <script>
+    // State
+    const selections = {};
+    let categories = [];
+    let nominees = [];
+    let currentPage = 0; // 0-indexed; totalPages = categories.length, last "page" = form
+    let totalPages = 0;
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/public/data');
+        const siteData = await res.json();
+        renderVotingPage(siteData);
+      } catch (err) {
+        console.error('Failed to load data:', err);
+        document.getElementById('categoriesContainer').innerHTML = '<p class="empty-state">Failed to load data. Please refresh the page.</p>';
+      }
+    }
+
+    function renderVotingPage(siteData) {
+      const s = siteData.settings || {};
+
+      // Header
+      document.title = (s.site_title || 'Chittara Star Awards 2026') + ' - Vote';
+      document.getElementById('voteHeaderTitle').textContent = s.site_title || 'Chittara Star Awards 2026';
+      if (s.logo1) {
+        const logo = document.getElementById('headerLogo');
+        logo.src = s.logo1;
+        logo.style.display = 'block';
+      }
+      if (s.footer_text) document.getElementById('footerText').innerHTML = s.footer_text;
+      if (s.about_bg) {
+        document.getElementById('votingSection').style.backgroundImage = "url('" + s.about_bg + "')";
+      }
+
+      categories = siteData.categories || [];
+      nominees = siteData.nominees || [];
+      totalPages = categories.length; // form page is totalPages index
+
+      if (!categories.length) {
+        document.getElementById('categoriesContainer').innerHTML = '<p class="empty-state">No categories available yet. Check back soon!</p>';
+        document.getElementById('progressBar').style.display = 'none';
+        return;
+      }
+
+      renderAllCategoryPages();
+      renderProgressDots();
+      showPage(0);
+    }
+
+    function renderAllCategoryPages() {
+      const container = document.getElementById('categoriesContainer');
+      container.innerHTML = '';
+
+      categories.forEach(function(cat, index) {
+        const catNominees = nominees.filter(function(n) { return n.category_id === cat.id; });
+        const page = document.createElement('div');
+        page.className = 'category-page';
+        page.id = 'catPage-' + index;
+
+        let html = '<h3 class="category-title">' + cat.name + '</h3>';
+        // Category name only, no subtitle
+
+        if (catNominees.length === 0) {
+          html += '<p class="empty-state">No nominees in this category yet.</p>';
+        } else {
+          html += '<div class="nominees-grid">';
+          catNominees.forEach(function(nom) {
+            html += '<div class="nominee-card" id="card-' + cat.id + '-' + nom.id + '" onclick="selectNominee(' + cat.id + ', ' + nom.id + ', ' + index + ')">' +
+              '<div class="nominee-img-wrapper"><img src="' + (nom.image || '/uploads/nominees/placeholder.png') + '" alt="' + nom.name + '"></div>' +
+              '<div class="nominee-radio"><input type="radio" name="cat_' + cat.id + '" value="' + nom.id + '" id="radio-' + cat.id + '-' + nom.id + '">' +
+              '<div><div class="nominee-name">' + nom.name + '</div>' +
+              (nom.subtitle ? '<div class="nominee-subtitle">' + nom.subtitle + '</div>' : '') +
+              '</div></div></div>';
+          });
+          html += '</div>';
+        }
+
+        // Navigation buttons
+        html += '<div class="nav-buttons">';
+        html += '<button class="nav-btn btn-prev" onclick="goToPage(' + (index - 1) + ')"' + (index === 0 ? ' disabled' : '') + '>&#8592; Previous</button>';
+        // No skip button
+        html += '<button class="nav-btn btn-next" id="nextBtn-' + index + '" onclick="goToPage(' + (index + 1) + ')" disabled>Next &#8594;</button>';
+        html += '</div>';
+
+        page.innerHTML = html;
+        container.appendChild(page);
+      });
+    }
+
+    function selectNominee(categoryId, nomineeId, pageIndex) {
+      // Deselect all in this category
+      document.querySelectorAll('[id^="card-' + categoryId + '-"]').forEach(function(c) { c.classList.remove('selected'); });
+      // Select chosen
+      document.getElementById('card-' + categoryId + '-' + nomineeId).classList.add('selected');
+      document.getElementById('radio-' + categoryId + '-' + nomineeId).checked = true;
+      selections[categoryId] = nomineeId;
+      // Enable the Next button for this page
+      var nextBtn = document.getElementById('nextBtn-' + pageIndex);
+      if (nextBtn) nextBtn.disabled = false;
+      // Update progress dot
+      updateProgressDots();
+
+      // Auto-advance after a short delay
+      setTimeout(function() {
+        goToPage(pageIndex + 1);
+      }, 400);
+    }
+
+    function goToPage(page) {
+      if (page < 0) return;
+      if (page > totalPages) return; // totalPages = form page
+
+      // Block forward navigation if current category has no selection
+      if (page > currentPage && currentPage < totalPages) {
+        var catId = categories[currentPage].id;
+        if (!selections[catId]) {
+          // Highlight the category to prompt selection
+          var catPage = document.getElementById('catPage-' + currentPage);
+          if (catPage) {
+            catPage.style.outline = '2px solid var(--maroon)';
+            catPage.style.outlineOffset = '5px';
+            setTimeout(function() { catPage.style.outline = 'none'; }, 1500);
+          }
+          return;
+        }
+      }
+
+      currentPage = page;
+
+      // Hide all category pages
+      document.querySelectorAll('.category-page').forEach(function(p) { p.classList.remove('active'); });
+      // Hide form
+      document.getElementById('voterForm').classList.remove('active');
+
+      if (page < totalPages) {
+        // Show category page
+        document.getElementById('catPage-' + page).classList.add('active');
+        document.getElementById('progressBar').style.display = 'block';
+        // Enable Next button if this category already has a selection
+        var nextBtn = document.getElementById('nextBtn-' + page);
+        if (nextBtn && selections[categories[page].id]) {
+          nextBtn.disabled = false;
+        }
+      } else {
+        // Show voter form (all categories done)
+        showVoterForm();
+        document.getElementById('progressBar').style.display = 'block';
+      }
+
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showPage(page) {
+      goToPage(page);
+    }
+
+    function goBack() {
+      // Go back to last category
+      goToPage(totalPages - 1);
+    }
+
+    // Progress
+    function updateProgress() {
+      const total = totalPages + 1; // categories + form
+      const percent = Math.round(((currentPage + 1) / total) * 100);
+      document.getElementById('progressFill').style.width = percent + '%';
+      document.getElementById('progressPercent').textContent = percent + '%';
+
+      if (currentPage < totalPages) {
+        document.getElementById('progressLabel').textContent = 'Category ' + (currentPage + 1) + ' of ' + totalPages;
+      } else {
+        document.getElementById('progressLabel').textContent = 'Submit Your Vote';
+      }
+
+      updateProgressDots();
+    }
+
+    function renderProgressDots() {
+      const container = document.getElementById('progressDots');
+      let html = '';
+      for (let i = 0; i < totalPages; i++) {
+        html += '<div class="progress-dot" data-page="' + i + '" onclick="goToPage(' + i + ')" title="' + categories[i].name + '"></div>';
+      }
+      // Form dot
+      html += '<div class="progress-dot" data-page="' + totalPages + '" onclick="goToPage(' + totalPages + ')" title="Submit Form"></div>';
+      container.innerHTML = html;
+    }
+
+    function updateProgressDots() {
+      document.querySelectorAll('.progress-dot').forEach(function(dot) {
+        const page = parseInt(dot.dataset.page);
+        dot.classList.remove('active', 'done');
+        if (page === currentPage) {
+          dot.classList.add('active');
+        } else if (page < totalPages && selections[categories[page].id]) {
+          dot.classList.add('done');
+        } else if (page < currentPage) {
+          dot.classList.add('done');
+        }
+      });
+    }
+
+    // Voter form
+    function showVoterForm() {
+      const form = document.getElementById('voterForm');
+      form.classList.add('active');
+
+      // Build selections summary
+      const summary = document.getElementById('selectionsSummary');
+      let html = '<h4>Your Selections (' + Object.keys(selections).length + ' of ' + totalPages + ' categories)</h4>';
+      categories.forEach(function(cat) {
+        const selectedId = selections[cat.id];
+        const nom = selectedId ? nominees.find(function(n) { return n.id === selectedId; }) : null;
+        html += '<div class="summary-item"><span class="summary-cat">' + cat.name + '</span><span class="summary-nom">' + (nom ? nom.name : 'Not selected') + '</span></div>';
+      });
+      summary.innerHTML = html;
+
+      // Refresh captcha when form appears
+      refreshCaptcha();
+    }
+
+    function refreshCaptcha() {
+      document.getElementById('captchaImg').src = '/api/captcha?' + Date.now();
+    }
+
+    async function submitVote(e) {
+      e.preventDefault();
+      const msgEl = document.getElementById('voteMessage');
+      const submitBtn = document.getElementById('submitBtn');
+
+      const name = document.getElementById('voterName').value.trim();
+      const mobile = document.getElementById('voterMobile').value.trim();
+      const location = document.getElementById('voterLocation').value.trim();
+      const captcha = document.getElementById('voterCaptcha').value.trim();
+
+      // Validate all categories selected
+      var missingCategories = categories.filter(function(cat) { return !selections[cat.id]; });
+      if (missingCategories.length > 0) {
+        msgEl.className = 'message error';
+        msgEl.textContent = 'Please select a nominee in all categories: ' + missingCategories.map(function(c) { return c.name; }).join(', ');
+        msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // Validate mobile
+      if (!/^\d{10}$/.test(mobile)) {
+        msgEl.className = 'message error';
+        msgEl.textContent = 'Please enter a valid 10-digit mobile number.';
+        msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // Validate captcha filled
+      if (!captcha) {
+        msgEl.className = 'message error';
+        msgEl.textContent = 'Please enter the captcha text.';
+        msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        const res = await fetch('/api/vote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, mobile, location, captcha, selections })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          // Show thank you page
+          document.getElementById('voterForm').classList.remove('active');
+          document.getElementById('progressBar').style.display = 'none';
+          document.getElementById('thankYou').classList.add('active');
+        } else {
+          msgEl.className = 'message error';
+          msgEl.textContent = data.error;
+          refreshCaptcha();
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Vote';
+          msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } catch (err) {
+        msgEl.className = 'message error';
+        msgEl.textContent = 'Network error. Please try again.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Vote';
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

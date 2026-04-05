@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partners</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+  <style>
+    .partners-page { padding: 0 0 60px; }
+    .partners-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 20px;
+    }
+    .partner-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      padding: 20px;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+      width: 180px;
+    }
+    .partner-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .partner-card img {
+      width: 120px;
+      height: 80px;
+      object-fit: contain;
+      filter: grayscale(20%);
+      transition: filter 0.3s;
+    }
+    .partner-card:hover img { filter: grayscale(0%); }
+    .partner-card span {
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--maroon-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .partner-card { width: 140px; padding: 15px; }
+      .partner-card img { width: 90px; height: 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="shared-header"></div>
+
+  <section class="partners-page section-gold-bg">
+    <div class="partners-bar"><h2>Partners</h2></div>
+    <div id="partnersContent">
+      <div class="loading"><img src="/uploads/logos/chittara-loader.png" alt="Loading" class="loading-logo"><p>Loading partners...</p></div>
+    </div>
+  </section>
+
+  <div id="shared-footer"></div>
+
+  <script src="/js/shared.js"></script>
+  <script>
+    loadSharedLayout(function(siteData) {
+      var partners = siteData.partners || [];
+      var container = document.getElementById('partnersContent');
+
+      if (!partners.length) {
+        container.innerHTML = '<p class="empty-state">Partners will be announced soon!</p>';
+        return;
+      }
+
+      var html = '<div class="partners-grid">';
+      partners.forEach(function(p) {
+        html += '<a class="partner-card" href="' + (p.website || '#') + '" target="_blank">';
+        html += '<img src="' + p.image + '" alt="' + p.name + '">';
+        html += '<span>' + p.name + '</span>';
+        html += '</a>';
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+  <style>
+    .videos-page { padding: 0 0 60px; }
+    .videos-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 15px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .video-card { overflow: hidden; border-radius: 8px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); }
+    .video-card iframe { width: 100%; height: 300px; border: none; display: block; }
+    .video-card .video-title {
+      padding: 12px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--maroon-dark);
+      background: var(--white);
+    }
+    @media (max-width: 900px) {
+      .videos-grid { grid-template-columns: repeat(2, 1fr); }
+      .video-card iframe { height: 220px; }
+    }
+    @media (max-width: 600px) {
+      .videos-grid { grid-template-columns: 1fr; padding: 10px; }
+      .video-card iframe { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="shared-header"></div>
+
+  <section class="videos-page section-gold-bg">
+    <div class="partners-bar"><h2>Videos</h2></div>
+    <div id="videosContent">
+      <div class="loading"><img src="/uploads/logos/chittara-loader.png" alt="Loading" class="loading-logo"><p>Loading videos...</p></div>
+    </div>
+  </section>
+
+  <div id="shared-footer"></div>
+
+  <script src="/js/shared.js"></script>
+  <script>
+    loadSharedLayout(function(siteData) {
+      var videos = siteData.videos || [];
+      var container = document.getElementById('videosContent');
+
+      if (!videos.length) {
+        container.innerHTML = '<p class="empty-state">No videos available yet. Check back soon!</p>';
+        return;
+      }
+
+      var html = '<div class="videos-grid">';
+      videos.forEach(function(v) {
+        var embedUrl = getVideoEmbed(v.youtube_url);
+        html += '<div class="video-card">';
+        html += '<iframe src="' + embedUrl + '" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="' + (v.title || 'Video') + '"></iframe>';
+        if (v.title) html += '<div class="video-title">' + v.title + '</div>';
+        html += '</div>';
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    });
+  </script>
+</body>
+</html>

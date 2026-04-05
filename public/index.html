@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chittara Star Awards 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+  <style>
+
+    /* ===== HERO BANNER - FULL WIDTH ===== */
+    .hero-banner {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f5efe0 0%, #ede3cc 30%, #e8dbc0 60%, #f0e8d5 100%);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .hero-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .hero-banner .hero-fallback {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #f5efe0 0%, #ede3cc 30%, #e8dbc0 60%, #f0e8d5 100%);
+    }
+    .hero-banner .hero-fallback h1 {
+      font-family: 'Playfair Display', 'Cinzel', serif;
+      font-size: 56px;
+      font-weight: 900;
+      background: linear-gradient(180deg, #c9a84c 0%, #a17d1a 50%, #8b6b10 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .hero-banner .hero-fallback p {
+      color: var(--gold-dark);
+      font-size: 20px;
+      font-weight: 500;
+      margin-top: 8px;
+      letter-spacing: 2px;
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .about-section {
+      max-width: 100%;
+      margin: 0;
+      padding: 50px 80px;
+      text-align: left;
+    }
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .about-section p {
+      color: var(--maroon-dark);
+      line-height: 1.85;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+    .about-section p:last-child {
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+
+    /* ===== AWARDS HIGHLIGHT SECTION ===== */
+    .awards-highlight {
+      padding: 0 0 60px;
+    }
+    .awards-highlight-bar {
+      background: var(--maroon);
+      padding: 18px 20px;
+      margin-bottom: 45px;
+      text-align: center;
+    }
+    .awards-highlight-bar h2 {
+      font-family: 'Playfair Display', 'Cinzel', serif;
+      color: var(--white);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+    .awards-highlight-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .awards-highlight-text {
+      flex: 1;
+      text-align: center;
+    }
+    .awards-highlight-text p {
+      color: var(--maroon-dark);
+      line-height: 1.85;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .awards-highlight-text p:last-child {
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+    .awards-highlight-video {
+      flex: 0 0 480px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      border: 3px solid var(--maroon);
+    }
+    .awards-highlight-video iframe {
+      width: 100%;
+      height: 280px;
+      border: none;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .awards-highlight-inner { flex-direction: column; gap: 30px; padding: 0 20px; }
+      .awards-highlight-video { flex: none; width: 100%; max-width: 500px; }
+      .awards-highlight-bar h2 { font-size: 20px; letter-spacing: 3px; }
+    }
+    @media (max-width: 600px) {
+      .awards-highlight-text p { font-size: 13px; }
+      .awards-highlight-video iframe { height: 220px; }
+    }
+
+    /* ===== VOTING SECTION ===== */
+    .voting-section {
+      padding: 60px 0;
+    }
+    .voting-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .vote-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 36px;
+      color: var(--maroon-dark);
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 900;
+    }
+
+    /* Category Block */
+    .category-block {
+      margin-bottom: 50px;
+      background: var(--white);
+      border-radius: 15px;
+      padding: 35px 25px;
+      box-shadow: 0 5px 25px rgba(139,26,26,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+    .category-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--maroon);
+      text-align: center;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    .nominees-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 25px;
+      justify-items: center;
+    }
+    .nominee-card {
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 15px;
+      border-radius: 12px;
+      border: 3px solid transparent;
+      width: 100%;
+      max-width: 220px;
+    }
+    .nominee-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(201,168,76,0.2);
+    }
+    .nominee-card.selected {
+      border-color: var(--maroon);
+      background: rgba(139,26,26,0.03);
+      box-shadow: 0 5px 20px rgba(139,26,26,0.15);
+    }
+    .nominee-img-wrapper {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      overflow: hidden;
+      border: 5px solid var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-light), 0 5px 20px rgba(201,168,76,0.3);
+      position: relative;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+      padding: 4px;
+    }
+    .nominee-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .nominee-radio {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      transition: all 0.3s;
+      background: var(--white);
+    }
+    .nominee-card.selected .nominee-radio {
+      border-color: var(--maroon);
+      background: var(--maroon);
+      color: var(--white);
+    }
+    .nominee-radio input[type="radio"] {
+      accent-color: var(--maroon);
+      width: 18px;
+      height: 18px;
+    }
+    .nominee-name {
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nominee-subtitle {
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+    }
+    .nominee-card.selected .nominee-subtitle {
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ===== VOTER FORM ===== */
+    .voter-form-section {
+      max-width: 650px;
+      margin: 40px auto 0;
+      background: var(--white);
+      border-radius: 15px;
+      padding: 40px 35px;
+      box-shadow: 0 5px 25px rgba(139,26,26,0.08);
+      border: 2px solid rgba(201,168,76,0.3);
+    }
+    .voter-form-section h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: var(--maroon);
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--maroon-dark);
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0d5c1;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s;
+      background: #fefcf7;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    }
+    .captcha-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .captcha-row .captcha-img {
+      border: 2px solid #e0d5c1;
+      border-radius: 8px;
+      background: #f5f5f5;
+      padding: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .captcha-row .captcha-img:hover {
+      border-color: var(--gold);
+    }
+    .captcha-row input { flex: 1; }
+    .captcha-refresh {
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    .captcha-refresh:hover {
+      background: var(--gold-dark);
+      color: var(--white);
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: var(--maroon);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    .submit-btn:hover {
+      background: var(--maroon-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139,26,26,0.3);
+    }
+    .submit-btn:disabled {
+      background: #999;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* MESSAGE */
+    .message {
+      text-align: center;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      display: none;
+    }
+    .message.error { background: #fee; color: var(--maroon); border: 1px solid #fcc; display: block; }
+    .message.success { background: #efe; color: #2a7a2a; border: 1px solid #cfc; display: block; }
+
+    /* ===== JURY SECTION ===== */
+    .jury-section {
+      padding: 0 0 60px;
+    }
+    .jury-header-bar {
+      background: var(--maroon);
+      padding: 16px 0;
+      margin-bottom: 50px;
+    }
+    .jury-header-bar h2 {
+      font-family: 'Playfair Display', 'Cinzel', serif;
+      color: var(--white);
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+    }
+    .jury-grid {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px 0;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .jury-row-separator {
+      width: 100%;
+      height: 0;
+      margin: 10px 0;
+    }
+    .jury-card {
+      text-align: center;
+      flex: 0 0 25%;
+      padding: 0 15px;
+      box-sizing: border-box;
+    }
+    .jury-img-frame {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      position: relative;
+      background: linear-gradient(145deg, #e8e0d0 0%, #c0b8a8 30%, #d8d0c0 50%, #b0a898 70%, #d0c8b8 100%);
+      padding: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15), inset 0 1px 3px rgba(255,255,255,0.4);
+    }
+    .jury-img-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--gold);
+      box-shadow: inset 0 0 0 2px var(--gold-dark), 0 0 0 1px rgba(201,168,76,0.3);
+    }
+    .jury-img-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .jury-card h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      color: var(--maroon-dark);
+      margin-top: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+    .jury-card p {
+      font-size: 11px;
+      color: var(--maroon);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* ===== PARTNERS ===== */
+    .partners-section { padding: 60px 0; }
+    .partners-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 0 20px;
+    }
+    .partner-logo {
+      width: 120px;
+      height: 80px;
+      object-fit: contain;
+      filter: grayscale(20%);
+      transition: all 0.3s;
+      padding: 5px;
+    }
+    .partner-logo:hover { filter: grayscale(0%); transform: scale(1.1); }
+
+    /* ===== VIDEOS ===== */
+    .videos-section { padding: 0 0 60px; }
+    .videos-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 15px;
+    }
+    .video-card { overflow: hidden; border-radius: 8px; }
+    .video-card iframe { width: 100%; height: 280px; border: none; display: block; }
+
+
+    /* ===== CATEGORIES SHOWCASE ===== */
+    .categories-showcase {
+      position: relative;
+      overflow: hidden;
+      border-top: 3px solid var(--maroon);
+    }
+    .categories-showcase-link {
+      display: block;
+      line-height: 0;
+      cursor: pointer;
+    }
+    .categories-showcase-link img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+
+    /* ===== PAGE-SPECIFIC RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .videos-grid { grid-template-columns: 1fr; }
+      .jury-card { flex: 0 0 50% !important; max-width: 50% !important; }
+      .jury-img-frame { width: 150px; height: 150px; }
+    }
+    @media (max-width: 600px) {
+      .about-section { padding: 35px 20px; }
+      .hero-banner .hero-fallback h1 { font-size: 28px; }
+    }
+
+    /* ===== NOMINEES SECTION (Homepage) ===== */
+    .nominees-section { padding: 0 0 60px; }
+    .nominees-section .nominees-category-block {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+    .nominees-section .nominees-category-block h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: var(--maroon);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+    }
+    .nominees-section .nominees-display-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 25px;
+      justify-items: center;
+    }
+    .nominees-section .nominee-display-card {
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      transition: all 0.3s;
+      width: 100%;
+      max-width: 220px;
+    }
+    .nominees-section .nominee-display-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(201,168,76,0.2);
+    }
+
+    /* ===== GALLERY SECTION ===== */
+    .gallery-section { padding: 0 0 60px; }
+    .gallery-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 0 20px;
+    }
+    .gallery-item {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.03); }
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (logos + social + navbar + vote CTA) ===== -->
+  <div id="shared-header"></div>
+
+  <!-- ===== HERO BANNER (full width) ===== -->
+  <section class="hero-banner" id="heroBannerSection">
+    <img id="heroBannerImg" src="" alt="Chittara Star Awards 2026" style="display:none;">
+    <div class="hero-fallback" id="heroFallback">
+      <h1 id="heroTitle">Chittara Star Awards 2026</h1>
+      <p id="heroTagline">Most Awaited Sandalwood Awards Show</p>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section section-gold-bg" id="about">
+    <div class="about-inner">
+      <h2 class="section-title">The Story Behind Us</h2>
+      <div id="aboutContent"></div>
+    </div>
+  </section>
+
+  <!-- ===== JURY ===== -->
+  <section class="jury-section section-gold-bg section-hidden" id="jury">
+    <div class="jury-header-bar"><h2>Jury Team</h2></div>
+    <div class="jury-grid" id="juryGrid"></div>
+  </section>
+
+  <!-- ===== AWARDS HIGHLIGHT ===== -->
+  <section class="awards-highlight section-gold-bg">
+    <div class="awards-highlight-bar">
+      <h2>Chittara Star Awards-2025 /<br>A Night of Stars, A Legacy of Success</h2>
+    </div>
+    <div class="awards-highlight-inner">
+      <div class="awards-highlight-text">
+        <p><strong>Chittara Star Awards 2026</strong> is set to be Karnataka's biggest celebration of cinema and stardom. A grand night dedicated to honoring the finest talents of Kannada and Indian entertainment. From blockbuster actors to brilliant technicians, excellence takes center stage. A star-studded evening featuring top celebrities, influencers, and industry icons. Spectacular performances and unforgettable red carpet moments await. Recognizing achievements across acting, direction, music, and more. A powerful platform connecting cinema, business, and creative leaders. Where networking meets glamour and opportunities are created.</p>
+        <p><strong>Chittara Star Awards 2026 – The Ultimate Stage of Fame, Talent &amp; Legacy.</strong></p>
+      </div>
+      <div class="awards-highlight-video">
+        <iframe src="https://player.vimeo.com/video/1102188761?autoplay=0&title=0&byline=0&portrait=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORIES SHOWCASE ===== -->
+  <section class="categories-showcase" id="categoriesShowcase">
+    <a href="/vote.html" class="categories-showcase-link">
+      <img src="/uploads/Cinema/1920x1080-All category.png" alt="Chittara Star Awards 2026 - Karnataka's Biggest Celebration of Cinema">
+    </a>
+  </section>
+
+  <!-- ===== NOMINEES PREVIEW (commented out) =====
+  <section class="nominees-section section-gold-bg section-hidden" id="nominees">
+    <div class="partners-bar"><h2>Nominees</h2></div>
+    <div id="nomineesContainer"></div>
+    <div style="text-align:center;padding:20px 0 40px;">
+      <a href="/nominees.html" style="display:inline-block;background:var(--maroon);color:var(--white);padding:14px 40px;font-family:'Cinzel',serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:2px;text-decoration:none;border-radius:8px;transition:all 0.3s;">View All Nominees</a>
+    </div>
+  </section>
+  ===== -->
+
+  <!-- ===== GALLERY (commented out) =====
+  <section class="gallery-section section-gold-bg section-hidden" id="gallery">
+    <div class="partners-bar"><h2>Gallery</h2></div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </section>
+  ===== -->
+
+  <!-- ===== PARTNERS ===== -->
+  <section class="partners-section section-gold-bg" id="partners">
+    <div class="partners-bar"><h2>Partners</h2></div>
+    <div class="partners-grid" id="partnersGrid"></div>
+  </section>
+
+  <!-- ===== VIDEOS ===== -->
+  <section class="videos-section section-gold-bg" id="videos">
+    <div class="partners-bar"><h2>Videos</h2></div>
+    <div class="videos-grid" id="videosGrid"></div>
+  </section>
+
+  <!-- ===== SHARED FOOTER (sticky vote + footer) ===== -->
+  <div id="shared-footer"></div>
+
+  <script src="/js/shared.js"></script>
+  <script>
+    loadSharedLayout(function(siteData) {
+      var s = siteData.settings || {};
+
+      // Page title
+      document.title = s.site_title || 'Chittara Star Awards 2026';
+
+      // Hero banner
+      var heroTitle = document.getElementById('heroTitle');
+      var heroTagline = document.getElementById('heroTagline');
+      if (heroTitle) heroTitle.textContent = s.site_title || 'Chittara Star Awards 2026';
+      if (heroTagline) heroTagline.textContent = s.tagline || 'Most Awaited Sandalwood Awards Show';
+
+      var bannerSection = document.getElementById('heroBannerSection');
+      var bannerImg = document.getElementById('heroBannerImg');
+      var heroFallback = document.getElementById('heroFallback');
+      if (s.banner_bg) bannerSection.style.backgroundImage = "url('" + s.banner_bg + "')";
+      if (s.banner_image) {
+        bannerImg.src = s.banner_image;
+        bannerImg.style.display = 'block';
+        heroFallback.style.display = 'none';
+      }
+
+      // About
+      if (s.about_text) {
+        document.getElementById('aboutContent').innerHTML = s.about_text.split('\n').map(function(p) { return '<p>' + p + '</p>'; }).join('');
+      }
+
+      // Jury (preview on homepage)
+      if (siteData.jury && siteData.jury.length) {
+        document.getElementById('jury').classList.remove('section-hidden');
+        var juryMembers = siteData.jury;
+        var total = juryMembers.length;
+        var firstRowCount = total <= 4 ? total : Math.ceil(total / 2);
+        var firstRow = juryMembers.slice(0, firstRowCount);
+        var secondRow = juryMembers.slice(firstRowCount);
+        var juryHtml = '<div class="jury-row" style="display:flex;flex-wrap:wrap;justify-content:center;width:100%;gap:40px 0;">';
+        juryHtml += firstRow.map(function(j) {
+          var w = (100 / firstRowCount).toFixed(2);
+          return '<div class="jury-card" style="flex:0 0 ' + w + '%;max-width:' + w + '%;"><div class="jury-img-frame"><div class="jury-img-inner"><img src="' + (j.image || '/uploads/nominees/placeholder.png') + '" alt="' + j.name + '"></div></div><h4>' + j.name + '</h4><p>' + (j.designation || '') + '</p></div>';
+        }).join('');
+        juryHtml += '</div>';
+        if (secondRow.length) {
+          juryHtml += '<div class="jury-row" style="display:flex;flex-wrap:wrap;justify-content:center;width:100%;gap:40px 0;margin-top:40px;">';
+          juryHtml += secondRow.map(function(j) {
+            var w = (100 / secondRow.length).toFixed(2);
+            return '<div class="jury-card" style="flex:0 0 ' + w + '%;max-width:' + w + '%;"><div class="jury-img-frame"><div class="jury-img-inner"><img src="' + (j.image || '/uploads/nominees/placeholder.png') + '" alt="' + j.name + '"></div></div><h4>' + j.name + '</h4><p>' + (j.designation || '') + '</p></div>';
+          }).join('');
+          juryHtml += '</div>';
+        }
+        document.getElementById('juryGrid').innerHTML = juryHtml;
+      }
+
+      // Partners (preview on homepage)
+      if (siteData.partners && siteData.partners.length) {
+        document.getElementById('partnersGrid').innerHTML = siteData.partners.map(function(p) {
+          return '<a href="' + (p.website || '#') + '" target="_blank"><img class="partner-logo" src="' + p.image + '" alt="' + p.name + '" title="' + p.name + '"></a>';
+        }).join('');
+      }
+
+      // Videos (preview on homepage)
+      if (siteData.videos && siteData.videos.length) {
+        document.getElementById('videos').classList.remove('section-hidden');
+        document.getElementById('videosGrid').innerHTML = siteData.videos.map(function(v) {
+          var embedUrl = getVideoEmbed(v.youtube_url);
+          return '<div class="video-card"><iframe src="' + embedUrl + '" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="' + v.title + '"></iframe></div>';
+        }).join('');
+      }
+
+      // Nominees (preview on homepage — commented out)
+      /*
+      if (siteData.nominees && siteData.nominees.length) {
+        document.getElementById('nominees').classList.remove('section-hidden');
+        var categories = siteData.categories || [];
+        var nomineesHtml = '';
+        categories.forEach(function(cat) {
+          var catNominees = siteData.nominees.filter(function(n) { return n.category_id === cat.id; });
+          if (catNominees.length === 0) return;
+          nomineesHtml += '<div class="nominees-category-block"><h3>' + cat.name + '</h3><div class="nominees-display-grid">';
+          catNominees.forEach(function(n) {
+            nomineesHtml += '<a href="/vote.html" class="nominee-display-card" style="text-decoration:none;color:inherit;cursor:pointer;">';
+            nomineesHtml += '<div class="nominee-img-wrapper"><img src="' + (n.image || '/uploads/nominees/placeholder.png') + '" alt="' + n.name + '"></div>';
+            nomineesHtml += '<div class="nominee-name">' + n.name + '</div>';
+            if (n.subtitle) nomineesHtml += '<div class="nominee-subtitle">' + n.subtitle + '</div>';
+            nomineesHtml += '</a>';
+          });
+          nomineesHtml += '</div></div>';
+        });
+        document.getElementById('nomineesContainer').innerHTML = nomineesHtml || '<div class="empty-state">No nominees available yet.</div>';
+      }
+      */
+
+      // Gallery (preview on homepage — commented out)
+      /*
+      if (siteData.gallery && siteData.gallery.length) {
+        document.getElementById('gallery').classList.remove('section-hidden');
+        document.getElementById('galleryGrid').innerHTML = siteData.gallery.map(function(g) {
+          return '<div class="gallery-item"><img src="' + g.image + '" alt="' + (g.title || 'Gallery') + '"></div>';
+        }).join('');
+      }
+      */
+    });
+  </script>
+</body>
+</html>
