@@ -19,11 +19,16 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Default admin user
-        if (DB::table('admin_users')->count() === 0) {
+        // Default admin user - update or create
+        $adminExists = DB::table('admin_users')->where('username', 'admin')->exists();
+        if ($adminExists) {
+            DB::table('admin_users')->where('username', 'admin')->update([
+                'password' => Hash::make('12345678'),
+            ]);
+        } else {
             DB::table('admin_users')->insert([
                 'username' => 'admin',
-                'password' => Hash::make('admin123'),
+                'password' => Hash::make('12345678'),
             ]);
         }
 
